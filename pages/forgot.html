@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STUDINNO 비밀번호 찾기</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/login.css" />
+</head>
+<body class="login-body">
+  <div class="login-wrap">
+
+    <!-- 왼쪽: 브랜드 패널 -->
+    <div class="login-brand">
+      <div class="lb-nodes"></div>
+      <div class="lb-content">
+        <div class="brand big">
+          <div class="brand-logo">S</div>
+          <div class="brand-name">STUDINNO</div>
+        </div>
+        <h2 class="lb-tagline">AI 인재양성 통합 플랫폼</h2>
+        <p class="lb-desc">산학협력 · 지식재산권 · 개방형 인프라를<br/>하나로 연결하는 차세대 플랫폼</p>
+        <div class="lb-features">
+          <span>🔒 안전한 계정 복구</span>
+          <span>📧 이메일 본인 인증</span>
+          <span>🗝️ 임시 비밀번호 발급</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 오른쪽: 비밀번호 찾기 카드 -->
+    <div class="login-panel">
+      <div class="login-card">
+        <h1 class="login-title">비밀번호 찾기</h1>
+        <p class="login-sub">가입한 이메일로 본인 확인 후 임시 비밀번호를 발급합니다.</p>
+
+        <!-- 단계 1: 이메일 인증 -->
+        <section id="fStep1">
+          <div class="fld">
+            <label class="field-label">회원 유형</label>
+            <select class="input" id="fType">
+              <option value="student">학생</option>
+              <option value="prof">교원</option>
+              <option value="company">기업</option>
+            </select>
+          </div>
+          <div class="fld">
+            <label class="field-label">가입 이메일</label>
+            <div class="verify-row">
+              <input class="input" id="fEmail" type="email" placeholder="user@example.com" autocomplete="off" />
+              <button type="button" class="btn outline sm" id="fSend">인증요청</button>
+            </div>
+            <div class="verify-box" id="fVerifyBox" hidden>
+              <div class="verify-row">
+                <input class="input" id="fCode" maxlength="6" placeholder="인증번호 6자리" autocomplete="off" />
+                <span class="timer" id="fTimer">3:00</span>
+                <button type="button" class="btn primary sm" id="fCheck">확인</button>
+              </div>
+              <p class="verify-msg" id="fMsg">발송된 인증번호를 입력해주세요. (데모: 아무 6자리)</p>
+            </div>
+          </div>
+          <button class="btn primary full" id="fNext" disabled>임시 비밀번호 발급</button>
+        </section>
+
+        <!-- 단계 2: 발급 완료 -->
+        <section id="fStep2" class="done-panel" hidden>
+          <div class="done-ic">📧</div>
+          <h2 class="login-title" style="font-size:20px">임시 비밀번호가 발급되었습니다</h2>
+          <p class="login-sub">아래 임시 비밀번호로 로그인한 뒤 <b>즉시 변경</b>해주세요.<br/>실제 서비스에서는 가입 이메일로 발송됩니다.</p>
+          <div class="temp-pw" id="fTempPw">--------</div>
+          <button class="btn primary full" id="fGo">로그인하러 가기</button>
+        </section>
+
+        <p class="login-foot"><a href="login.html">← 로그인으로 돌아가기</a></p>
+      </div>
+    </div>
+
+  </div>
+  <script src="../dist/forgot.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STUDINNO 통합 플랫폼</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="layout">
+    <!-- 사이드바 -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand" id="brandHome" title="대시보드로 이동">
+        <div class="brand-logo">S</div>
+        <div class="brand-name">STUDINNO</div>
+      </div>
+      <nav class="nav">
+        <div class="nav-item active" data-page="dashboard" aria-current="page">📊 대시보드</div>
+        <div class="nav-item" data-page="matching">🤝 AI매칭</div>
+        <div class="nav-item has-fly" data-page="projects">🏭 산학프로젝트
+          <div class="nav-flyout">
+            <div class="fly-head">프로젝트 수행</div>
+            <div class="fly-item" data-page="projects">🏭 산학프로젝트 · RFP</div>
+            <div class="fly-item" data-page="workspace">🗂️ 워크스페이스 · 칸반</div>
+            <div class="fly-item" data-page="ide">💻 클라우드 IDE · 형상관리</div>
+            <div class="fly-item" data-page="compete">🏆 경진대회 · 해커톤</div>
+          </div>
+        </div>
+        <div class="nav-item has-fly" data-page="team">👥 팀구성
+          <div class="nav-flyout">
+            <div class="fly-head">팀 · 인재</div>
+            <div class="fly-item" data-page="team">👥 팀구성 · 모집</div>
+            <div class="fly-item" data-page="talent">🎯 인재검색 · 블라인드</div>
+          </div>
+        </div>
+        <div class="nav-item has-fly" data-page="portfolio">🏅 역량·포트폴리오
+          <div class="nav-flyout">
+            <div class="fly-head">역량 관리</div>
+            <div class="fly-item" data-page="portfolio">🏅 역량 인증 · 포트폴리오</div>
+            <div class="fly-item" data-page="roadmap">🧭 진로 로드맵 · 학습가이드</div>
+          </div>
+        </div>
+        <div class="nav-item" data-page="ip">📑 지식재산권</div>
+        <div class="nav-item" data-page="infra">🖥️ 인프라예약</div>
+        <div class="nav-divider"></div>
+        <div class="nav-item" data-page="admin">⚙️ 관리자</div>
+      </nav>
+      <div class="sidebar-foot">
+        <div class="link-badges" id="linkBadges">
+          <span class="lb" data-link="gitlab">GitLab</span>
+          <span class="lb" data-link="kaggle">Kaggle</span>
+          <span class="lb" data-link="sems">S.E.M.S</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 메인 -->
+    <div class="main">
+      <header class="topbar">
+  <div class="topbar-left">
+    <button id="menuToggle" class="icon-btn menu-toggle" aria-label="메뉴 열기">☰</button>
+    <h1 id="pageTitle">대시보드</h1>
+  </div>
+
+  <div class="topbar-center">
+    <div class="gsearch" id="gsearch">
+      <span class="gsearch-ic">🔍</span>
+      <input id="globalSearch" class="gsearch-input" autocomplete="off"
+        placeholder="통합검색 — 프로젝트 · 지식재산권 · 인재 검색"/>
+      <button class="gsearch-x" id="globalSearchX" title="지우기" aria-label="검색어 지우기">✕</button>
+      <div class="gsearch-drop" id="globalSearchDrop"></div>
+    </div>
+  </div>
+
+  <div class="topbar-right">
+    <button id="themeToggle" class="icon-btn" title="테마 전환" aria-label="테마 전환">☀️</button>
+    <button id="notifBtn" class="icon-btn" title="알림" aria-label="알림 열기">
+      🔔<span class="notif-dot" id="notifDot"></span>
+    </button>
+    <div class="user-chip" id="userChip" title="내 계정" role="button" tabindex="0" aria-label="내 계정 메뉴" aria-haspopup="menu">
+      <span class="user-avatar">KH</span>
+      <span class="user-name">김학생</span>
+      <span class="chip-caret">▾</span>
+    </div>
+    <div class="profile-pop" id="profilePop" hidden><!-- JS가 채움 --></div>
+  </div>
+</header>
+      <main class="app" id="app"><!-- render() 가 채움 --></main>
+      <footer class="app-foot">
+        <span>© 2026 STUDINNO · 순천대학교 AI인재양성 사업단</span>
+        <span class="foot-links">
+          <a href="#" class="foot-doc" data-doc="이용약관">이용약관</a>
+          <a href="#" class="foot-doc" data-doc="개인정보 처리방침">개인정보 처리방침</a>
+        </span>
+      </footer>
+    </div>
+  </div>
+    </div><!-- /.layout -->
+
+  <!-- ========== 알림함 슬라이드 패널 ========== -->
+  <div class="notif-scrim" id="notifScrim"></div>
+  <aside class="notif-panel" id="notifPanel">
+    <div class="notif-head">
+      <h3>🔔 알림</h3>
+      <button class="notif-readall" id="notifReadAll">모두 읽음</button>
+      <button class="modal-x" id="notifClose" aria-label="알림 닫기">✕</button>
+    </div>
+    <div class="notif-list" id="notifList" aria-live="polite"><!-- JS가 채움 --></div>
+  </aside>
+
+  <!-- ========== 모달 레이어 ========== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modalBox" role="dialog" aria-modal="true" tabindex="-1"><!-- JS가 내용 채움 --></div>
+  </div>
+  <!-- 토스트 알림 -->
+  <div class="toast-wrap" id="toastWrap" aria-live="polite" aria-atomic="false"></div>
+
+  <script src="dist/data.js"></script>
+  <script src="dist/charts.js"></script>
+  <script src="dist/infra.js"></script>
+  <script src="dist/pages.js"></script>
+  <script src="dist/ip.js"></script>
+  <script src="dist/admin.js"></script>
+  <script src="dist/repo.js"></script>
+  <script src="dist/compete.js"></script>
+  <script src="dist/main.js"></script>
+</body>
+</html>

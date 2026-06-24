@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STUDINNO 회원가입</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/login.css" />
+</head>
+<body class="login-body">
+  <div class="login-wrap signup-wrap">
+
+    <!-- 왼쪽: 브랜드 패널 (로그인과 동일) -->
+    <div class="login-brand">
+      <div class="lb-nodes"></div>
+      <div class="lb-content">
+        <div class="brand big">
+          <div class="brand-logo">S</div>
+          <div class="brand-name">STUDINNO</div>
+        </div>
+        <h2 class="lb-tagline">AI 인재양성 통합 플랫폼</h2>
+        <p class="lb-desc">산학협력 · 지식재산권 · 개방형 인프라를<br/>하나로 연결하는 차세대 플랫폼</p>
+        <div class="lb-features">
+          <span>🎓 학생 · 교원 · 기업 통합 가입</span>
+          <span>🔗 GitLab · Kaggle 자동 연동</span>
+          <span>🏛️ S.E.M.S / STUDINNO 참여</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 오른쪽: 회원가입 위저드 -->
+    <div class="login-panel">
+      <div class="login-card signup-card">
+
+        <!-- 단계 표시 -->
+        <div class="step-bar" id="stepBar">
+          <div class="step active" data-step="1"><i>1</i><span>약관 동의</span></div>
+          <div class="step" data-step="2"><i>2</i><span>유형 선택</span></div>
+          <div class="step" data-step="3"><i>3</i><span>정보 입력</span></div>
+          <div class="step" data-step="4"><i>4</i><span>완료</span></div>
+        </div>
+
+        <!-- STEP 1: 약관 동의 -->
+        <section class="step-panel" data-panel="1">
+          <h1 class="login-title">약관 동의</h1>
+          <p class="login-sub">서비스 이용을 위해 약관에 동의해주세요.</p>
+
+          <label class="agree-all">
+            <input type="checkbox" id="agreeAll" />
+            <span class="chk"></span>
+            <b>전체 동의 (선택 포함)</b>
+          </label>
+
+          <div class="agree-list">
+            <label class="agree-item">
+              <input type="checkbox" class="agree" data-req="1" />
+              <span class="chk"></span>
+              <span class="agree-tx">[필수] 이용약관 동의</span>
+              <button type="button" class="agree-view" data-doc="이용약관">보기</button>
+            </label>
+            <label class="agree-item">
+              <input type="checkbox" class="agree" data-req="1" />
+              <span class="chk"></span>
+              <span class="agree-tx">[필수] 개인정보 수집·이용 동의</span>
+              <button type="button" class="agree-view" data-doc="개인정보 처리방침">보기</button>
+            </label>
+            <label class="agree-item">
+              <input type="checkbox" class="agree" data-req="0" />
+              <span class="chk"></span>
+              <span class="agree-tx">[선택] 마케팅 정보 수신 동의</span>
+              <button type="button" class="agree-view" data-doc="마케팅 정보 수신">보기</button>
+            </label>
+          </div>
+
+          <button class="btn primary full" id="toStep2" disabled>다음</button>
+          <p class="login-foot">이미 계정이 있으신가요? <a href="login.html">로그인</a></p>
+        </section>
+
+        <!-- STEP 2: 유형 선택 -->
+        <section class="step-panel" data-panel="2" hidden>
+          <h1 class="login-title">회원 유형 선택</h1>
+          <p class="login-sub">가입 유형에 따라 입력 정보가 달라집니다.</p>
+
+          <div class="type-cards" id="typeCards">
+            <button type="button" class="type-card" data-type="student">
+              <span class="tc-ic">🎓</span>
+              <span class="tc-nm">학생</span>
+              <span class="tc-ds">학번·학과로 가입</span>
+            </button>
+            <button type="button" class="type-card" data-type="prof">
+              <span class="tc-ic">👩‍🏫</span>
+              <span class="tc-nm">교원</span>
+              <span class="tc-ds">소속으로 가입</span>
+            </button>
+            <button type="button" class="type-card" data-type="company">
+              <span class="tc-ic">🏢</span>
+              <span class="tc-nm">기업</span>
+              <span class="tc-ds">사업자번호·담당부서</span>
+            </button>
+          </div>
+          <p class="type-note" id="typeNote" hidden>ℹ️ 기업 회원은 가입 후 관리자 승인이 필요합니다.</p>
+
+          <div class="step-actions">
+            <button class="btn outline" id="back1">이전</button>
+            <button class="btn primary" id="toStep3" disabled>다음</button>
+          </div>
+        </section>
+
+        <!-- STEP 3: 정보 입력 -->
+        <section class="step-panel" data-panel="3" hidden>
+          <h1 class="login-title">정보 입력 <span class="type-tag" id="typeTag"></span></h1>
+          <p class="login-sub">아래 정보를 입력해주세요.</p>
+
+          <div class="fld">
+            <label class="field-label">이름</label>
+            <input class="input" id="suName" placeholder="홍길동" autocomplete="off" />
+          </div>
+
+          <!-- 유형별 동적 필드 -->
+          <div id="dynamicFields"></div>
+
+          <!-- 이메일 + 인증 -->
+          <div class="fld">
+            <label class="field-label">이메일</label>
+            <div class="verify-row">
+              <input class="input" id="suEmail" type="email" placeholder="user@example.com" autocomplete="off" />
+              <button type="button" class="btn outline sm" id="sendCode">인증요청</button>
+            </div>
+            <div class="verify-box" id="verifyBox" hidden>
+              <div class="verify-row">
+                <input class="input" id="suCode" maxlength="6" placeholder="인증번호 6자리" autocomplete="off" />
+                <span class="timer" id="codeTimer">3:00</span>
+                <button type="button" class="btn primary sm" id="checkCode">확인</button>
+              </div>
+              <p class="verify-msg" id="verifyMsg">발송된 인증번호를 입력해주세요. (데모: 아무 6자리)</p>
+            </div>
+          </div>
+
+          <!-- 비밀번호 + 실시간 유효성 -->
+          <div class="fld">
+            <label class="field-label">비밀번호</label>
+            <input class="input" id="suPw" type="password" placeholder="비밀번호" autocomplete="new-password" />
+            <ul class="pw-check" id="pwCheck">
+              <li data-rule="len">8자 이상</li>
+              <li data-rule="alnum">영문 + 숫자 포함</li>
+              <li data-rule="special">특수문자 포함</li>
+            </ul>
+          </div>
+          <div class="fld">
+            <label class="field-label">비밀번호 확인</label>
+            <input class="input" id="suPw2" type="password" placeholder="비밀번호 재입력" autocomplete="new-password" />
+            <p class="pw-match" id="pwMatch"></p>
+          </div>
+
+          <div class="step-actions">
+            <button class="btn outline" id="back2">이전</button>
+            <button class="btn primary" id="signupGo" disabled>가입하기</button>
+          </div>
+        </section>
+
+        <!-- STEP 4: 완료 -->
+        <section class="step-panel done-panel" data-panel="4" hidden>
+          <div class="done-ic" id="doneIc">🎉</div>
+          <h1 class="login-title" id="doneTitle">가입을 환영합니다!</h1>
+          <p class="login-sub" id="doneMsg"></p>
+          <button class="btn primary full" id="doneGo">로그인하러 가기</button>
+        </section>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 약관 보기 모달 -->
+  <div class="modal-overlay" id="docOverlay">
+    <div class="modal" id="docBox"></div>
+  </div>
+
+  <script src="../dist/signup.js"></script>
+</body>
+</html>

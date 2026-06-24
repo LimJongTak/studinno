@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STUDINNO 로그인</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/login.css" />
+</head>
+<body class="login-body">
+  <div class="login-wrap">
+
+    <!-- 왼쪽: 브랜드 패널 -->
+    <div class="login-brand">
+      <div class="lb-nodes"></div>
+      <div class="lb-content">
+        <div class="brand big">
+          <div class="brand-logo">S</div>
+          <div class="brand-name">STUDINNO</div>
+        </div>
+        <h2 class="lb-tagline">AI 인재양성 통합 플랫폼</h2>
+        <p class="lb-desc">산학협력 · 지식재산권 · 개방형 인프라를<br/>하나로 연결하는 차세대 플랫폼</p>
+        <div class="lb-features">
+          <span>🏭 산학프로젝트</span>
+          <span>📑 지식재산권</span>
+          <span>🖥️ 인프라 예약</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 오른쪽: 로그인 카드 -->
+    <div class="login-panel">
+      <div class="login-card">
+        <h1 class="login-title">로그인</h1>
+        <p class="login-sub">SSO 계정으로 간편하게 시작하세요</p>
+
+        <!-- SSO 버튼 (보완5) -->
+        <button class="sso-btn gitlab" data-sso="gitlab">
+          <span class="sso-ic">🦊</span> GitLab으로 로그인
+        </button>
+        <button class="sso-btn kaggle" data-sso="kaggle">
+          <span class="sso-ic">📊</span> Kaggle로 로그인
+        </button>
+
+        <!-- 자동연동 안내 -->
+        <div class="sso-note" id="ssoNote">
+          ℹ️ 최초 로그인 시 GitLab · Kaggle 계정이 자동 가입·연동됩니다.
+        </div>
+
+        <div class="divider"><span>또는 서버 선택 후 로그인</span></div>
+
+        <!-- 서버 선택 (보완7) -->
+        <div class="server-select">
+          <label class="server-opt" data-server="STUDINNO">
+            <input type="checkbox" value="STUDINNO" />
+            <div class="server-box">
+              <div class="server-nm">🟢 STUDINNO</div>
+              <div class="server-ds">AI인재양성 부트캠프</div>
+            </div>
+          </label>
+          <label class="server-opt" data-server="SEMS">
+            <input type="checkbox" value="S.E.M.S" />
+            <div class="server-box">
+              <div class="server-nm">🔵 S.E.M.S</div>
+              <div class="server-ds">SW사업단 프로그램</div>
+            </div>
+          </label>
+        </div>
+        <p class="server-hint" id="serverHint">두 서버 모두 선택 시 양쪽 사업에 함께 참여합니다.</p>
+
+        <button class="btn primary full login-go" id="loginGo">로그인</button>
+
+        <p class="login-foot">계정이 없으신가요? <a href="signup.html">회원가입</a> · <a href="forgot.html">비밀번호 찾기</a></p>
+      </div>
+    </div>
+
+  </div>
+  <script src="../dist/login.js"></script>
+</body>
+</html>

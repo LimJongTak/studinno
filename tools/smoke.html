@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>SMOKE</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script>
+    // 인증 게이트 통과 (스모크는 리다이렉트 없이 앱 렌더 검증)
+    localStorage.setItem("studinno-auth", "1");
+    localStorage.removeItem("studinno-data-v");
+  </script>
+  <style>#smoke{position:fixed;inset:0;z-index:99999;background:#fff;padding:24px;font:14px monospace}</style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand" id="brandHome"><div class="brand-logo">S</div><div class="brand-name">STUDINNO</div></div>
+      <nav class="nav">
+        <div class="nav-item active" data-page="dashboard">📊 대시보드</div>
+        <div class="nav-item" data-page="matching">🤝 AI매칭</div>
+        <div class="nav-item has-fly" data-page="projects">🏭 산학프로젝트<div class="nav-flyout"><div class="fly-item" data-page="workspace">ws</div><div class="fly-item" data-page="ide">ide</div></div></div>
+        <div class="nav-item has-fly" data-page="team">👥 팀구성<div class="nav-flyout"><div class="fly-item" data-page="talent">t</div></div></div>
+        <div class="nav-item has-fly" data-page="portfolio">🏅 역량<div class="nav-flyout"><div class="fly-item" data-page="roadmap">r</div></div></div>
+        <div class="nav-item" data-page="ip">📑 지식재산권</div>
+        <div class="nav-item" data-page="infra">🖥️ 인프라예약</div>
+        <div class="nav-divider"></div>
+        <div class="nav-item" data-page="admin">⚙️ 관리자</div>
+      </nav>
+      <div class="sidebar-foot"><div class="link-badges" id="linkBadges"><span class="lb" data-link="gitlab">GitLab</span><span class="lb" data-link="kaggle">Kaggle</span><span class="lb" data-link="sems">S.E.M.S</span></div></div>
+    </aside>
+    <div class="main">
+      <header class="topbar">
+        <div class="topbar-left"><button id="menuToggle" class="icon-btn menu-toggle">☰</button><h1 id="pageTitle">대시보드</h1></div>
+        <div class="topbar-center"><div class="gsearch" id="gsearch"><span class="gsearch-ic">🔍</span><input id="globalSearch" class="gsearch-input"/><button class="gsearch-x" id="globalSearchX">✕</button><div class="gsearch-drop" id="globalSearchDrop"></div></div></div>
+        <div class="topbar-right"><button id="themeToggle" class="icon-btn">☀️</button><button id="notifBtn" class="icon-btn">🔔<span class="notif-dot" id="notifDot"></span></button><div class="user-chip" id="userChip"><span class="user-avatar">KH</span><span class="user-name">김학생</span><span class="chip-caret">▾</span></div><div class="profile-pop" id="profilePop" hidden></div></div>
+      </header>
+      <main class="app" id="app"></main>
+      <footer class="app-foot"><a href="#" class="foot-doc" data-doc="이용약관">이용약관</a></footer>
+    </div>
+  </div>
+  <div class="notif-scrim" id="notifScrim"></div>
+  <aside class="notif-panel" id="notifPanel"><div class="notif-head"><h3>🔔 알림</h3><button class="notif-readall" id="notifReadAll">모두 읽음</button><button class="modal-x" id="notifClose">✕</button></div><div class="notif-list" id="notifList" aria-live="polite"></div></aside>
+  <div class="modal-overlay" id="modalOverlay"><div class="modal" id="modalBox" role="dialog" aria-modal="true" tabindex="-1"></div></div>
+  <div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+
+  <script src="../dist/data.js"></script>
+  <script src="../dist/charts.js"></script>
+  <script src="../dist/infra.js"></script>
+  <script src="../dist/pages.js"></script>
+  <script src="../dist/ip.js"></script>
+  <script src="../dist/admin.js"></script>
+  <script src="../dist/repo.js"></script>
+  <script src="../dist/compete.js"></script>
+  <script src="../dist/main.js"></script>
+  <script>
+    // 전 페이지 렌더 + 핵심 모달 스모크
+    var pages = ["dashboard","matching","projects","workspace","ide","compete","team","portfolio","roadmap","talent","ip","infra","admin"];
+    var out = "", fail = 0;
+    pages.forEach(function(p){
+      try { render(p); out += "PASS " + p + "\n"; }
+      catch(e){ fail++; out += "FAIL " + p + " — " + (e && e.message || e) + "\n"; }
+    });
+    [["match-modal", function(){ openMatchDetail("PJT-001","김학생"); closeModal(); }],
+     ["rfp-modal", function(){ openRfpModal(); closeModal(); }],
+     ["doc-modal", function(){ openDocModal("이용약관"); closeModal(); }]
+    ].forEach(function(t){
+      try { t[1](); out += "PASS " + t[0] + "\n"; }
+      catch(e){ fail++; out += "FAIL " + t[0] + " — " + (e && e.message || e) + "\n"; }
+    });
+    document.title = fail === 0 ? "SMOKE: ALL PASS" : ("SMOKE: FAILS=" + fail);
+    var d = document.createElement("pre"); d.id = "smoke";
+    d.textContent = document.title + "\n\n" + out;
+    document.body.appendChild(d);
+  </script>
+</body>
+</html>

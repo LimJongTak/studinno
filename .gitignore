@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor / local agent state
+.claude/
+
+# Temp dev artifacts
+tools/_*.txt
+tools/_*.html

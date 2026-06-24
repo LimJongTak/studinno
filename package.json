@@ -1,0 +1,24 @@
+{
+  "name": "studinno-platform",
+  "version": "1.0.0",
+  "description": "STUDINNO 통합 플랫폼 (TypeScript + SCSS)",
+  "private": true,
+  "scripts": {
+    "build:ts": "tsc",
+    "build:css": "sass scss/style.scss:css/style.css scss/login.scss:css/login.css --no-source-map --style=expanded",
+    "build": "npm run build:ts && npm run build:css",
+    "watch:ts": "tsc --watch",
+    "watch:css": "sass --watch scss/style.scss:css/style.css scss/login.scss:css/login.css --no-source-map",
+    "serve": "http-server . -p 8080 -c-1 -o",
+    "smoke": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/smoke.ps1",
+    "start": "npm run build && npm run serve",
+    "dev": "npm-run-all --parallel watch:ts watch:css serve",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\""
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "npm-run-all": "^4.1.5",
+    "sass": "^1.77.0",
+    "typescript": "^5.4.0"
+  }
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script>
+    localStorage.setItem("studinno-auth", "1");
+    localStorage.setItem("studinno-sso", JSON.stringify({ gitlab: true, kaggle: true }));
+    localStorage.setItem("studinno-servers", JSON.stringify(["STUDINNO", "S.E.M.S"]));
+    localStorage.removeItem("studinno-data-v");
+  </script>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand" id="brandHome"><div class="brand-logo">S</div><div class="brand-name">STUDINNO</div></div>
+      <nav class="nav">
+        <div class="nav-item active" data-page="dashboard">📊 대시보드</div>
+        <div class="nav-item" data-page="matching">🤝 AI매칭</div>
+        <div class="nav-item has-fly" data-page="projects">🏭 산학프로젝트<div class="nav-flyout"><div class="fly-head">프로젝트 수행</div><div class="fly-item" data-page="projects">🏭 산학프로젝트 · RFP</div><div class="fly-item" data-page="workspace">🗂️ 워크스페이스 · 칸반</div><div class="fly-item" data-page="ide">💻 클라우드 IDE</div></div></div>
+        <div class="nav-item has-fly" data-page="team">👥 팀구성<div class="nav-flyout"><div class="fly-head">팀 · 인재</div><div class="fly-item" data-page="team">👥 팀구성</div><div class="fly-item" data-page="talent">🎯 인재검색</div></div></div>
+        <div class="nav-item has-fly" data-page="portfolio">🏅 역량·포트폴리오<div class="nav-flyout"><div class="fly-head">역량 관리</div><div class="fly-item" data-page="portfolio">🏅 포트폴리오</div><div class="fly-item" data-page="roadmap">🧭 진로 로드맵</div></div></div>
+        <div class="nav-item" data-page="ip">📑 지식재산권</div>
+        <div class="nav-item" data-page="infra">🖥️ 인프라예약</div>
+        <div class="nav-divider"></div>
+        <div class="nav-item" data-page="admin">⚙️ 관리자</div>
+      </nav>
+      <div class="sidebar-foot"><div class="link-badges" id="linkBadges"><span class="lb" data-link="gitlab">GitLab</span><span class="lb" data-link="kaggle">Kaggle</span><span class="lb" data-link="sems">S.E.M.S</span></div></div>
+    </aside>
+    <div class="main">
+      <header class="topbar">
+        <div class="topbar-left"><button id="menuToggle" class="icon-btn menu-toggle">☰</button><h1 id="pageTitle">대시보드</h1></div>
+        <div class="topbar-center"><div class="gsearch" id="gsearch"><span class="gsearch-ic">🔍</span><input id="globalSearch" class="gsearch-input"/><button class="gsearch-x" id="globalSearchX">✕</button><div class="gsearch-drop" id="globalSearchDrop"></div></div></div>
+        <div class="topbar-right"><button id="themeToggle" class="icon-btn">☀️</button><button id="notifBtn" class="icon-btn">🔔<span class="notif-dot" id="notifDot"></span></button><div class="user-chip" id="userChip"><span class="user-avatar">KH</span><span class="user-name">김학생</span><span class="chip-caret">▾</span></div><div class="profile-pop" id="profilePop" hidden></div></div>
+      </header>
+      <main class="app" id="app"></main>
+      <footer class="app-foot"><span>© 2026 STUDINNO</span><span class="foot-links"><a href="#" class="foot-doc" data-doc="이용약관">이용약관</a></span></footer>
+    </div>
+  </div>
+  <div class="notif-scrim" id="notifScrim"></div>
+  <aside class="notif-panel" id="notifPanel"><div class="notif-head"><h3>🔔 알림</h3><button class="notif-readall" id="notifReadAll">모두 읽음</button><button class="modal-x" id="notifClose">✕</button></div><div class="notif-list" id="notifList" aria-live="polite"></div></aside>
+  <div class="modal-overlay" id="modalOverlay"><div class="modal" id="modalBox" role="dialog" aria-modal="true" tabindex="-1"></div></div>
+  <div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+
+  <script src="dist/data.js"></script>
+  <script src="dist/charts.js"></script>
+  <script src="dist/infra.js"></script>
+  <script src="dist/pages.js"></script>
+  <script src="dist/ip.js"></script>
+  <script src="dist/admin.js"></script>
+  <script src="dist/repo.js"></script>
+  <script src="dist/compete.js"></script>
+  <script src="dist/main.js"></script>
+  <script>
+    var h = location.hash.slice(1);
+    if (h === "mobile") { goPage("dashboard"); document.getElementById("sidebar").classList.add("open"); }
+    else if (h === "profile") { goPage("dashboard"); document.getElementById("userChip").click(); }
+    else if (h === "empty") {
+      // 모든 IP 삭제 → 빈 상태
+      DATA.ip = []; goPage("ip");
+    } else if (h === "created") {
+      // 자체 등록 항목(삭제 버튼) 노출
+      createdItems.add("IP-001"); goPage("ip");
+    } else { goPage("dashboard"); }
+  </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+// ============ SCSS 믹스인 ============
+
+// 다크 테마 전용 규칙을 컴포넌트 내부에 중첩해 작성할 수 있게 한다.
+// 사용: .foo { color:red; @include dark { color:blue; } }  →  body.dark .foo { color:blue; }
+@mixin dark {
+  body.dark & {
+    @content;
+  }
+}
